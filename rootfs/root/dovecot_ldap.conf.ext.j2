@@ -1,0 +1,16 @@
+hosts           = {{ ALL_LDAP_HOST }}:389
+ldap_version    = 3
+auth_bind       = yes
+dn              = {{ ALL_LDAP_BIND_DN }}
+dnpass          = {{ ALL_LDAP_BIND_PW }}
+base            = {{ ALL_LDAP_SEARCH_BASE }}
+scope           = subtree
+deref           = never
+tls             = {{ ALL_LDAP_TLS_REQUIRED }}
+
+user_attrs = {{ DOVECOT_LDAP_USER_ATTR }}
+user_filter = {{ DOVECOT_LDAP_USER_FILTER }}
+
+pass_attrs = {{ DOVECOT_LDAP_PASS_ATTR }}
+pass_filter = {{ DOVECOT_LDAP_PASS_FILTER }}
+

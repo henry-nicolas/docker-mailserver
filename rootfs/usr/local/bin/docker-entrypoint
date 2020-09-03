@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+# check if we need to run the first setup
+test -f /etc/config.done || setup
+
+# Run supervisor
+exec "$@"

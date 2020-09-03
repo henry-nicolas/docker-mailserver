@@ -1,0 +1,19 @@
+plugin {
+  quota = maildir
+  quota_rule = *:storage={{ DOVECOT_MAILBOX_SIZE }}
+  quota_rule2 = Trash:storage=+100M
+  quota_grace = 10%%
+  quota_exceeded_message = The quota of this mailbox is exhausted. Contact your system administrator.
+  quota_warning =  storage=95%% quota-warning 95 %u
+  quota_warning2 = storage=85%% quota-warning 85 %u
+  quota_warning3 = storage=75%% quota-warning 75 %u
+}
+
+
+service quota-warning {
+  executable = script /usr/local/bin/quota-warning.sh
+  # use some unprivileged user for executing the quota warnings
+  user = vmail
+  unix_listener quota-warning {
+  }
+}

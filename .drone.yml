@@ -1,0 +1,19 @@
+kind: pipeline
+type: docker
+name: default
+
+steps:
+- name: docker  
+  image: plugins/docker
+  settings:
+    repo:     henrynicolas/mailserver
+    custom_dns: 192.168.11.66
+    username: 
+      from_secret: HUB_USERNAME
+    password: 
+      from_secret: HUB_PASSWORD
+    tags:
+      - latest
+    environment:
+      - HTTP_PROXY=http://proxy.nilux.be:3128
+      - HTTPS_PROXY=http://proxy.nilux.be:3128

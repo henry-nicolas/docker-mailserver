@@ -1,0 +1,11 @@
+server_host = {{ ALL_LDAP_HOST }}:389
+version = 3
+start_tls = {{ ALL_LDAP_TLS_REQUIRED }}
+bind_dn = {{ ALL_LDAP_BIND_DN }}
+bind_pw = {{ ALL_LDAP_BIND_PW }}
+scope = sub
+search_base = {{ ALL_LDAP_SEARCH_BASE }}
+
+query_filter = {{ POSTFIX_LOCAL_LDAP_FILTER }}
+result_attribute = {{ POSTFIX_LOCAL_LDAP_ATTR | default('mail') }}
+

@@ -1,0 +1,66 @@
+#!/usr/bin/env sh
+
+set -e
+
+# folder is not created by pkg postfix-ldap
+mkdir /etc/postfix/ldap
+
+echo "[SETUP] Generating services configuration"
+# Generating all the config files
+j2 /root/dovecot_confd_10-ssl.conf.j2 > /etc/dovecot/conf.d/10-ssl.conf
+j2 /root/dovecot_confd_15-lda.conf.j2 > /etc/dovecot/conf.d/15-lda.conf
+j2 /root/dovecot_confd_20-lmtp.conf.j2 > /etc/dovecot/conf.d/20-lmtp.conf
+j2 /root/dovecot_confd_90-quota.conf.j2 > /etc/dovecot/conf.d/90-quota.conf
+j2 /root/dovecot_ldap.conf.ext.j2 > /etc/dovecot/dovecot-ldap.conf.ext
+j2 /root/fail2ban_jaild_container.conf.j2 > /etc/fail2ban/jail.d/container.conf
+j2 /root/etc_mailname.j2 > /etc/mailname
+j2 /root/freshclam.conf.j2 > /etc/clamav/freshclam.conf
+j2 /root/rspamd_locald_redis.conf.j2 > /etc/rspamd/local.d/redis.conf
+j2 /root/rspamd_locald_statistic.conf.j2 > /etc/rspamd/local.d/statistic.conf
+j2 /root/rspamd_overrided_options.inc.j2 > /etc/rspamd/override.d/options.inc
+j2 /root/postfix_header_checks.j2 > /etc/postfix/header_checks
+j2 /root/postfix_main.cf.j2 > /etc/postfix/main.cf
+j2 /root/postfix_virtual.j2 > /etc/postfix/virtual
+
+# ldap postfix maps
+export POSTFIX_LOCAL_LDAP_FILTER=$POSTFIX_LDAP_FORWARD_FILTER && j2 /root/postfix_ldap_map.j2 > /etc/postfix/ldap/virtual-forward-maps.cf
+export POSTFIX_LOCAL_LDAP_FILTER=$POSTFIX_LDAP_GROUP_FILTER   && j2 /root/postfix_ldap_map.j2 > /etc/postfix/ldap/virtual-group-maps.cf
+export POSTFIX_LOCAL_LDAP_FILTER=$POSTFIX_LDAP_DOMAIN_FILTER  && j2 /root/postfix_ldap_map.j2 > /etc/postfix/ldap/virtual-mailbox-domains.cf
+export POSTFIX_LOCAL_LDAP_FILTER=$POSTFIX_LDAP_MAILBOX_FILTER && j2 /root/postfix_ldap_map.j2 > /etc/postfix/ldap/virtual-mailbox-maps.cf
+export POSTFIX_LOCAL_LDAP_FILTER=$POSTFIX_LDAP_ALIAS_FILTER   && j2 /root/postfix_ldap_map.j2 > /etc/postfix/ldap/virtual-alias-maps.cf
+export POSTFIX_LOCAL_LDAP_FILTER=$POSTFIX_LDAP_SENDER_FILTER  ; export POSTFIX_LOCAL_LDAP_ATTR="mail,mailalias" && j2 /root/postfix_ldap_map.j2 > /etc/postfix/ldap/sender-login-maps.cf
+
+# POSTFIX
+# ---------------------------------------------------------------------------------------------
+
+
+echo "[SETUP] Setting up postfix maps and permissions"
+# Build header_checks and virtual index files
+postmap /etc/postfix/header_checks
+postmap /etc/postfix/virtual
+
+# Set permissions
+postfix set-permissions 2>&1 >/dev/null &
+
+# Ensure that hashes are calculated because Postfix require directory
+# to be set up like this in order to find CA certificates.
+c_rehash /etc/ssl/certs 2>&1 >/dev/null &
+
+# DOVECOT
+# ---------------------------------------------------------------------------------------------
+
+echo "[SETUP] Setting up Dovecot maps and permissions"
+
+mkdir -p /var/mail/vhosts/$ALL_DOMAIN
+mkdir -p /var/mail/dkim/$ALL_DOMAIN
+# Check permissions of vhosts directories
+find /var/mail/vhosts ! -user vmail -print0 | xargs -0 -r chown vmail:vmail
+
+# Avoid file_dotlock_open function exception
+rm -f /var/mail/dovecot/instances
+
+if [ -f "/var/mail/dovecot/ssl-parameters.dat" ]; then
+  mv /var/mail/dovecot/ssl-parameters.dat /var/mail/dovecot/ssl-parameters.dat.backup
+fi
+
+touch /etc/config.done

@@ -1,0 +1,45 @@
+[DEFAULT]
+ignoreip = 127.0.0.1/8 ::1 {{ FAIL2BAN_IGNORE_IP }}
+
+[postfix]
+# To use another modes set filter parameter "mode" in jail.local:
+enabled  = true
+mode     = aggressive
+bantime  = 3600
+findtime = 3600
+port     = smtp,465,submission
+logpath  = /var/log/postfix
+backend  = %(postfix_backend)s
+maxretry = 3
+
+
+[postfix-rbl]
+# A blacklisted server we do not want to talk to too soon
+enabled  = true
+bantime  = 86400
+filter   = postfix[mode=rbl]
+port     = smtp,465,submission
+logpath  = /var/log/postfix
+backend  = %(postfix_backend)s
+maxretry = 1
+
+[postfix-sasl]
+enabled  = true
+bantime  = 3600
+findtime = 3600
+filter   = postfix[mode=auth]
+port     = smtp,465,submission,imap,imaps,pop3,pop3s
+logpath  = /var/log/postfix
+backend  = %(postfix_backend)s
+maxretry = 3
+
+[dovecot]
+enabled  = true
+bantime  = 3600
+findtime = 3600
+port     = imaps,submission,465,sieve
+logpath  = /var/log/dovecot
+backend  = %(dovecot_backend)s
+maxretry = 3
+
+
