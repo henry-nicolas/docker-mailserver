@@ -39,7 +39,7 @@ RUN addgroup --gid $VMAIL_UID vmail \
     && apt-get -qy --no-install-recommends install postfix postfix-ldap postfix-pcre dovecot-core dovecot-ldap dovecot-imapd dovecot-lmtpd dovecot-sieve dovecot-managesieved \ 
        rspamd clamav-daemon fail2ban supervisor python3-pip python3-setuptools iptables \
     && pip3 install --no-input j2cli \
-    && rm -fr /etc/dovecot/ /etc/supervisor/ /etc/fail2ban/jail.d/defaults-debian.conf
+    && rm -fr /etc/dovecot/ /etc/supervisor/ /etc/fail2ban/jail.d/defaults-debian.conf /etc/logrotate.d/
 
 COPY rootfs /
 RUN  chmod +x /usr/local/bin/* /etc/dovecot/sieve/*
