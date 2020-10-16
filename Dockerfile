@@ -43,7 +43,8 @@ RUN addgroup --gid $VMAIL_UID vmail \
     && apt-get clean
 
 COPY rootfs /
-RUN  chmod +x /usr/local/bin/* /etc/dovecot/sieve/*
+RUN  chmod +x /usr/local/bin/* /etc/dovecot/sieve/* \
+     && chmod 0644 /etc/logrotate.d/*
 ENTRYPOINT ["docker-entrypoint"]
 
 VOLUME /var/log
