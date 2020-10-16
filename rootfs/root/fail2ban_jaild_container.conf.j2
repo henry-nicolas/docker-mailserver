@@ -8,7 +8,7 @@ mode     = aggressive
 bantime  = 3600
 findtime = 3600
 port     = smtp,465,submission
-logpath  = /var/log/postfix
+logpath  = /var/mail/vhosts/log/postfix
 backend  = %(postfix_backend)s
 maxretry = 3
 
@@ -19,7 +19,7 @@ enabled  = true
 bantime  = 86400
 filter   = postfix[mode=rbl]
 port     = smtp,465,submission
-logpath  = /var/log/postfix
+logpath  = /var/mail/vhosts/log/postfix
 backend  = %(postfix_backend)s
 maxretry = 1
 
@@ -29,7 +29,7 @@ bantime  = 3600
 findtime = 3600
 filter   = postfix[mode=auth]
 port     = smtp,465,submission,imap,imaps,pop3,pop3s
-logpath  = /var/log/postfix
+logpath  = /var/mail/vhosts/log/postfix
 backend  = %(postfix_backend)s
 maxretry = 3
 
@@ -38,7 +38,7 @@ enabled  = true
 bantime  = 3600
 findtime = 3600
 port     = imaps,submission,465,sieve
-logpath  = /var/log/dovecot
+logpath  = /var/mail/vhosts/log/dovecot
 backend  = %(dovecot_backend)s
 maxretry = 3
 
