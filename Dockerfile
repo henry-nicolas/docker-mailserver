@@ -18,6 +18,9 @@ ENV POSTFIX_MYNETWORKS= \
     DOVECOT_LDAP_PASS_ATTR= \
     DOVECOT_LDAP_PASS_FILTER= \
     DOVECOT_MAILBOX_SIZE="2GB" \
+    RAINLOOP_ADMIN_USERNAME= \
+    RAINLOOP_ADMIN_PASSWORD= \
+    RAINLOOP_FQDN= \
     RSPAMD_REDIS_HOST= \
     RSPAMD_REDIS_DBNUM= \
     FAIL2BAN_IGNORE_IP= \
@@ -38,6 +41,7 @@ RUN addgroup --gid $VMAIL_UID vmail \
     && apt-get update \
     && apt-get -qy --no-install-recommends install postfix postfix-ldap postfix-pcre dovecot-core dovecot-ldap dovecot-imapd dovecot-lmtpd dovecot-sieve dovecot-managesieved \ 
        rspamd clamav-daemon fail2ban supervisor python3-pip python3-setuptools iptables cron \
+       rainloop apache2 libapache2-mod-php \
     && pip3 install --no-input j2cli \
     && rm -fr /etc/dovecot/ /etc/supervisor/ /etc/fail2ban/jail.d/defaults-debian.conf /etc/logrotate.d/ /var/lib/apt/lists/ \
     && apt-get clean
@@ -51,5 +55,5 @@ VOLUME /var/log
 VOLUME /var/mail/vhosts
 VOLUME /var/spool/postfix
 
-EXPOSE 25 465 587 993 4190
+EXPOSE 25 80 465 587 993 4190
 CMD ["supervisord", "-c", "/etc/supervisord.conf"]

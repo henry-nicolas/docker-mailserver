@@ -63,4 +63,15 @@ if [ -f "/var/mail/dovecot/ssl-parameters.dat" ]; then
   mv /var/mail/dovecot/ssl-parameters.dat /var/mail/dovecot/ssl-parameters.dat.backup
 fi
 
+# RAINLOOP
+# ---------------------------------------------------------------------------------------------
+
+echo "[SETUP] Setting up Rainloop"
+
+cp /etc/rainloop/rainloop.apache.conf /etc/apache2/sites-available/000-default.conf
+j2 /root/rainloop_application.ini.j2 > /etc/rainloop/application.ini
+sed -i '/Log/d' /etc/apache2/sites-available/000-default.conf
+a2disconf other-vhosts-access-log.conf
+a2enconf  container-access-log.conf
+
 touch /etc/config.done
