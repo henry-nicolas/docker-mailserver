@@ -54,6 +54,7 @@ ENTRYPOINT ["docker-entrypoint"]
 VOLUME /var/log
 VOLUME /var/mail/vhosts
 VOLUME /var/spool/postfix
+VOLUME /var/lib/rainloop/_data_
 
 EXPOSE 25 80 465 587 993 4190
 CMD ["supervisord", "-c", "/etc/supervisord.conf"]
