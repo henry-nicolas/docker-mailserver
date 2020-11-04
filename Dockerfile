@@ -42,7 +42,7 @@ RUN addgroup --gid $VMAIL_UID vmail \
     && apt-get update \
     && apt-get -qy --no-install-recommends install postfix postfix-ldap postfix-pcre dovecot-core dovecot-ldap dovecot-imapd dovecot-lmtpd dovecot-sieve dovecot-managesieved \ 
        rspamd clamav-daemon fail2ban supervisor python3-pip python3-setuptools iptables cron \
-       rainloop apache2 libapache2-mod-php \
+       rainloop apache2 libapache2-mod-php php-ldap php-sqlite3 \
     && pip3 install --no-input j2cli \
     && rm -fr /etc/dovecot/ /etc/supervisor/ /etc/fail2ban/jail.d/defaults-debian.conf /etc/logrotate.d/ /var/lib/apt/lists/ \
     && apt-get clean
