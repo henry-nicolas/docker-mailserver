@@ -1,7 +1,7 @@
 ## RainLoop default configuration for Apache2
 
-<VirtualHost *:80>
+<VirtualHost {{ POSTFIX_FQDN }}:80>
 	# For use as a virtual host, set ServerName to the desired FQDN.
-	#ServerName www.example.com
+	ServerName {{ POSTFIX_FQDN }}
 	DocumentRoot /usr/share/rainloop
 </VirtualHost>
