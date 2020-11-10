@@ -25,7 +25,7 @@ maxretry = 1
 
 [postfix-sasl]
 enabled  = true
-bantime  = 3600
+bantime  = 900
 findtime = 3600
 filter   = postfix[mode=auth]
 port     = smtp,465,submission,imap,imaps,pop3,pop3s
@@ -35,7 +35,7 @@ maxretry = 3
 
 [dovecot]
 enabled  = true
-bantime  = 3600
+bantime  = 900
 findtime = 3600
 port     = imaps,submission,465,sieve
 logpath  = /var/mail/vhosts/log/dovecot
