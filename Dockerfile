@@ -53,6 +53,7 @@ RUN  chmod +x /usr/local/bin/* /etc/dovecot/sieve/* \
 ENTRYPOINT ["docker-entrypoint"]
 
 VOLUME /var/log
+VOLUME /var/lib/clamav
 VOLUME /var/mail/vhosts
 VOLUME /var/spool/postfix
 VOLUME /var/lib/rainloop/_data_

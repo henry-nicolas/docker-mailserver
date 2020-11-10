@@ -72,4 +72,10 @@ j2 /root/rainloop_application.ini.j2 > /etc/rainloop/application.ini
 a2disconf other-vhosts-access-log.conf
 a2enconf  container-access-log.conf
 
+# Freshclan
+# ---------------------------------------------------------------------------------------------
+
+echo "[SETUP] Downloading clamav database"
+freshclam --foreground
+
 touch /etc/config.done
