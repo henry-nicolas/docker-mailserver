@@ -3,6 +3,8 @@
 # check if we need to run the first setup
 test -f /etc/config.done || setup
 test -d /var/mail/vhosts/log || mkdir -p /var/mail/vhosts/log
+test -d /var/run/clamav      || mkdir /var/run/clamav
+chown clamav:clamav /var/run/clamav
 
 # Run supervisor
 exec "$@"
