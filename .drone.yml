@@ -14,6 +14,3 @@ steps:
       from_secret: HUB_PASSWORD
     tags:
       - latest
-    environment:
-      - HTTP_PROXY=http://proxy.nilux.be:3128
-      - HTTPS_PROXY=http://proxy.nilux.be:3128
