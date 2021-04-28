@@ -203,4 +203,7 @@ non_smtpd_milters     = inet:localhost:11332
 {% if POSTFIX_RELAYHOST is defined and POSTFIX_RELAYHOST %}
 relayhost             = {{ POSTFIX_RELAYHOST }}
 {% endif %}
+{% if POSTFIX_BACKUP_RELAYHOST is defined and POSTFIX_BACKUP_RELAYHOST %}
+smtp_fallback_relay   = {{ POSTFIX_BACKUP_RELAYHOST }}
+{% endif %}
 
