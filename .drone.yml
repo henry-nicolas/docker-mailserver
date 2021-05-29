@@ -13,4 +13,4 @@ steps:
     password: 
       from_secret: HUB_PASSWORD
     tags:
-      - latest
+      - bullseye
