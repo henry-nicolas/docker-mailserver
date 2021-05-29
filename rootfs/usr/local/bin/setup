@@ -63,16 +63,8 @@ if [ -f "/var/mail/dovecot/ssl-parameters.dat" ]; then
   mv /var/mail/dovecot/ssl-parameters.dat /var/mail/dovecot/ssl-parameters.dat.backup
 fi
 
-# RAINLOOP
-# ---------------------------------------------------------------------------------------------
 
-echo "[SETUP] Setting up Rainloop"
-
-j2 /root/rainloop_application.ini.j2 > /etc/rainloop/application.ini
-a2disconf other-vhosts-access-log.conf
-a2enconf  container-access-log.conf
-
-# Freshclan
+# Freshclam
 # ---------------------------------------------------------------------------------------------
 
 echo "[SETUP] Downloading clamav database"
