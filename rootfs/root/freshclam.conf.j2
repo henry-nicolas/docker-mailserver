@@ -80,21 +80,6 @@ ScriptedUpdates yes
 # Default: 12 (every two hours)
 #Checks 24
 
-# Proxy settings
-# The HTTPProxyServer may be prefixed with [scheme]:// to specify which kind
-# of proxy is used.
-#   http://     HTTP Proxy. Default when no scheme or proxy type is specified.
-#   https://    HTTPS Proxy. (Added in 7.52.0 for OpenSSL, GnuTLS and NSS)
-#   socks4://   SOCKS4 Proxy.
-#   socks4a://  SOCKS4a Proxy. Proxy resolves URL hostname.
-#   socks5://   SOCKS5 Proxy.
-#   socks5h://  SOCKS5 Proxy. Proxy resolves URL hostname.
-# Default: disabled
-{% if ALL_HTTP_PROXY_HOST is defined and ALL_HTTP_PROXY_HOST %}
-HTTPProxyServer {{ ALL_HTTP_PROXY_HOST }}
-HTTPProxyPort {{ ALL_HTTP_PROXY_PORT }}
-{% endif %}
-
 # If your servers are behind a firewall/proxy which applies User-Agent
 # filtering you can use this option to force the use of a different
 # User-Agent header.

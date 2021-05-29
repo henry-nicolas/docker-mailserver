@@ -35,8 +35,6 @@ ENV POSTFIX_MYNETWORKS= \
     ALL_LDAP_BIND_PW= \
     ALL_LDAP_SEARCH_BASE= \
     ALL_LDAP_TLS_REQUIRED="yes" \
-    ALL_HTTP_PROXY_HOST= \
-    ALL_HTTP_PROXY_PORT=
 
 RUN addgroup --gid $VMAIL_UID vmail \
     && adduser --disabled-password --uid $VMAIL_UID --gid $VMAIL_GID vmail \
