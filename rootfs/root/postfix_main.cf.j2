@@ -197,8 +197,8 @@ smtpd_helo_restrictions =
 
 milter_protocol       = 6
 milter_default_action = accept
-smtpd_milters         = inet:localhost:11332
-non_smtpd_milters     = inet:localhost:11332
+smtpd_milters         = inet:localhost:11332, inet:localhost:17789
+non_smtpd_milters     = inet:localhost:11332, inet:localhost:17789
 # Default: disabled
 {% if POSTFIX_RELAYHOST is defined and POSTFIX_RELAYHOST %}
 relayhost             = {{ POSTFIX_RELAYHOST }}
