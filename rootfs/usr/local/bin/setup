@@ -74,7 +74,6 @@ freshclam --foreground
 # ---------------------------------------------------------------------------------------------
 
 echo "[SETUP] Setting up OpenDKIM and generating keys if needed"
-j2 /root/opendkim_TrustedHosts.j2 > /etc/opendkim/TrustedHosts
 # split domain with , separator on env var DKIM_DOMAINS
 # done following: https://fr-wiki.ikoula.com/fr/Installer_DKIM_sur_Postfix_sous_Debian
 for domain in $(echo $DIM_DOMAINS | sed "s/,/ /g") ; do
