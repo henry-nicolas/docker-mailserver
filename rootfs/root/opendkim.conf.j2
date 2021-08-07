@@ -6,6 +6,8 @@ SyslogSuccess           Yes
 LogWhy                  Yes
 
 Canonicalization        relaxed/simple
+On-BadSignature         reject
+Nameservers             {{ DKIM_RESOLVER }}
 
 ExternalIgnoreList      refile:/etc/opendkim/TrustedHosts
 InternalHosts           refile:/etc/opendkim/TrustedHosts
