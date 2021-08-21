@@ -85,6 +85,7 @@ for domain in $(echo $DIM_DOMAINS | sed "s/,/ /g") ; do
   test -d /etc/opendkim/keys/$domain && continue
   mkdir -p /etc/opendkim/keys/$domain
   cd /etc/opendkim/keys/$domain
+  echo "INFO: Generating DKIM keys for domain $domain"
   opendkim-genkey -s mail -d $domain
 done
 usermod -aG opendkim postfix
