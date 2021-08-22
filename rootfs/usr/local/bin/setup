@@ -78,7 +78,7 @@ j2 /root/opendkim.conf.j2 > /etc/opendkim/opendkim.conf
 j2 /root/opendkim_TrustedHosts.j2 > /etc/opendkim/TrustedHosts
 # split domain with , separator on env var DKIM_DOMAINS
 # done following: https://fr-wiki.ikoula.com/fr/Installer_DKIM_sur_Postfix_sous_Debian
-for domain in $(echo $DIM_DOMAINS | sed "s/,/ /g") ; do
+for domain in $(echo $DKIM_DOMAINS | sed "s/,/ /g") ; do
   echo "*.$domain" >> /etc/opendkim/TrustedHosts
   echo "mail._domainkey.$domain $domain:mail:/etc/opendkim/keys/$domain/mail.private" >> /etc/opendkim/KeyTable
   echo "*@$domain mail._domainkey.$domain" >> /etc/opendkim/SigningTable
