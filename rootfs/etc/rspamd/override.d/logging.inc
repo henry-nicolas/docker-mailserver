@@ -1,2 +1,2 @@
-type = "file";
-filename = "/dev/stdout";
+type = "syslog";
+facility = "rspamd";

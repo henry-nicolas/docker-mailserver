@@ -41,7 +41,7 @@ RUN addgroup --gid $VMAIL_UID vmail \
     && adduser --disabled-password --uid $VMAIL_UID --gid $VMAIL_GID vmail \
     && apt-get update \
     && apt-get -qy --no-install-recommends install postfix postfix-ldap postfix-pcre dovecot-core dovecot-ldap dovecot-imapd dovecot-lmtpd dovecot-sieve dovecot-managesieved \ 
-       rspamd clamav-daemon fail2ban supervisor python3-pip python3-setuptools iptables cron j2cli opendkim opendkim-tools \
+       rspamd clamav-daemon fail2ban supervisor python3-pip python3-setuptools iptables cron j2cli opendkim opendkim-tools inetutils-syslogd \
     && rm -fr /etc/dovecot/ /etc/supervisor/ /etc/fail2ban/jail.d/defaults-debian.conf /etc/logrotate.d/ /var/lib/apt/lists/ /etc/opendkim/ \
     && apt-get clean
 
