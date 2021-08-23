@@ -1,4 +1,10 @@
-hosts           = {{ ALL_LDAP_HOST }}:636
+{% if 'yes' in ALL_LDAP_TLS_REQUIRED %}
+uris            = ldaps://{{ ALL_LDAP_HOST }}
+tls_ca_cert_file= /etc/ssl/certs/ca-certificates.crt
+tls_require_cert= hard
+{% else %}
+uris            = ldap://{{ ALL_LDAP_HOST }}
+{% endif %}
 ldap_version    = 3
 auth_bind       = yes
 dn              = {{ ALL_LDAP_BIND_DN }}
@@ -6,7 +12,6 @@ dnpass          = {{ ALL_LDAP_BIND_PW }}
 base            = {{ ALL_LDAP_SEARCH_BASE }}
 scope           = subtree
 deref           = never
-tls             = {{ ALL_LDAP_TLS_REQUIRED }}
 
 user_attrs = {{ DOVECOT_LDAP_USER_ATTR }}
 user_filter = {{ DOVECOT_LDAP_USER_FILTER }}
