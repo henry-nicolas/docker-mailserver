@@ -3,10 +3,10 @@ AutoRestartRate         10/1h
 UMask                   002
 Syslog                  yes
 SyslogSuccess           yes
-LogWhy                  Yes
+LogWhy                  yes
 
 Canonicalization        relaxed/simple
-On-BadSignature         reject
+On-BadSignature         accept
 Nameservers             {{ DKIM_RESOLVER }}
 
 ExternalIgnoreList      refile:/etc/opendkim/TrustedHosts
