@@ -198,6 +198,8 @@ milter_protocol       = 6
 milter_default_action = accept
 smtpd_milters         = inet:localhost:11332, inet:localhost:17789
 non_smtpd_milters     = inet:localhost:11332, inet:localhost:17789
+# make sure bounces are processed by OpenDKIM for signing
+internal_mail_filter_classes = bounce
 # Default: disabled
 {% if POSTFIX_RELAYHOST is defined and POSTFIX_RELAYHOST %}
 relayhost             = {{ POSTFIX_RELAYHOST }}

@@ -91,5 +91,8 @@ done
 usermod -aG opendkim postfix
 chown -R opendkim:opendkim /etc/opendkim
 
+echo "[SETUP] Fixing top level directories permissions"
+chmod 0755 /etc /usr
+chmod 0700 /root
 
 touch /etc/config.done
