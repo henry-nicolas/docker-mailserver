@@ -18,6 +18,7 @@ j2 /root/freshclam.conf.j2 > /etc/clamav/freshclam.conf
 j2 /root/rspamd_locald_redis.conf.j2 > /etc/rspamd/local.d/redis.conf
 j2 /root/rspamd_locald_statistic.conf.j2 > /etc/rspamd/local.d/statistic.conf
 j2 /root/rspamd_overrided_options.inc.j2 > /etc/rspamd/override.d/options.inc
+j2 /root/rspamd_ip-whitelist.map.j2 > /etc/rspamd/local.d/ip-whitelist.map
 j2 /root/postfix_header_checks.j2 > /etc/postfix/header_checks
 j2 /root/postfix_main.cf.j2 > /etc/postfix/main.cf
 j2 /root/postfix_virtual.j2 > /etc/postfix/virtual
