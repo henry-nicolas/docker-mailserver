@@ -1,8 +1,0 @@
-/var/mail/vhosts/log/postfix {
-  missingok
-  monthly
-  dateext
-  rotate 12
-  create
-  compress
-}
