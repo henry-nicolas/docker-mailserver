@@ -146,9 +146,8 @@ smtpd_relay_restrictions=
 # * reject_non_fqdn_sender : Reject when the MAIL FROM address is not in fully-qualified domain form
 # * reject_unknown_sender_domain : Reject when the MAIL FROM domain has no DNS MX, no DNS A record or a malformed MX record
 # * reject_sender_login_mismatch: Reject when the client is not (SASL) logged in as that MAIL FROM address owner or when the client is (SASL) logged in, but the client login name doesn't own the MAIL FROM address
-# * reject_rhsbl_sender : Reject when the MAIL FROM domain is blacklisted in dbl.spamhaus.org
 
-smtpd_sender_restrictions = permit_mynetworks, reject_non_fqdn_sender, reject_unknown_sender_domain, reject_sender_login_mismatch, reject_rhsbl_sender dbl.spamhaus.org
+smtpd_sender_restrictions = permit_mynetworks, reject_non_fqdn_sender, reject_unknown_sender_domain, reject_sender_login_mismatch
 
 ##
 # Restrictions that the Postfix SMTP server applies in the context
@@ -168,7 +167,7 @@ smtpd_recipient_restrictions=
     reject_unknown_recipient_domain,
     reject_non_fqdn_recipient,
     reject_unlisted_recipient,
-    reject_rbl_client zen.spamhaus.org
+    reject_rbl_client sbl.spamhaus.org
 
 ##
 # Restrictions that the Postfix SMTP server applies in the context of a client HELO command
