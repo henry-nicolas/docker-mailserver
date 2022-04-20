@@ -57,5 +57,5 @@ VOLUME /var/mail/vhosts
 VOLUME /var/spool/postfix
 VOLUME /etc/opendkim/keys
 
-EXPOSE 25 80 465 587 993 4190
+EXPOSE 25 465 587 993 4190
 CMD ["supervisord", "-c", "/etc/supervisord.conf"]
